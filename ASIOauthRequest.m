@@ -8,8 +8,9 @@
 
 #import "ASIOauthRequest.h"
 
-#import <openssl/hmac.h>
+#import "NSData+Base64.h"
 
+#import <CommonCrypto/CommonHMAC.h> 
 
 @implementation ASIOauthRequest
 
@@ -72,37 +73,20 @@
 
 - (NSString*)rawHMAC_SHA1EncodeString: (NSString*)plaintext usingKey: (NSString*)keytext
 {	
-	size_t keyLen, msgLen; 
-	unsigned char *key; 
-	const unsigned char* msg; 
-	unsigned int macLen;
-	unsigned char *result;
+	unsigned char digest[CC_SHA1_DIGEST_LENGTH] = {0};
+	const char* keychar = (char*)[keytext cStringUsingEncoding: NSUTF8StringEncoding];
+	const char* datachar = (char*)[plaintext cStringUsingEncoding: NSUTF8StringEncoding];
 	
-	keyLen = [keytext length];
-	msgLen = [plaintext length];
-	key = (unsigned char*)[keytext cStringUsingEncoding: NSUTF8StringEncoding];
-	msg = (unsigned char*)[plaintext cStringUsingEncoding: NSUTF8StringEncoding];
+	CCHmacContext hctx;
+	CCHmacInit(&hctx, kCCHmacAlgSHA1, keychar, strlen(keychar));
+	CCHmacUpdate(&hctx, datachar, strlen(datachar));
+	CCHmacFinal(&hctx, digest);
 	
-	result = HMAC(EVP_sha1(), key, keyLen, msg, msgLen, NULL, &macLen); 
 	
-	// finally we need to base64 encode the result
-    BIO *context = BIO_new(BIO_s_mem());
-	
-    BIO *command = BIO_new(BIO_f_base64());
-    context = BIO_push(command, context);
-	
-    BIO_write(context, result, macLen);
-    BIO_flush(context);
-	
-    // Get the data into a string, but drop the last char (\n)
-    char *outputBuffer;
-    long outputLength = BIO_get_mem_data(context, &outputBuffer);
-    NSString *encodedString = [NSString
-							   stringWithCString:outputBuffer
-							   length:outputLength - 1];
-	
-    BIO_free_all(context);
-	
+	NSData *digestData = [NSData dataWithBytes: digest
+										length: CC_SHA1_DIGEST_LENGTH];
+	NSString *encodedString = [digestData base64EncodedString];
+
 	return encodedString;
 }
 

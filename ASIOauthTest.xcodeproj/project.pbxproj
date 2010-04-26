@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainMenu.xib */; };
-		4C3B68D611802A8F00568ADB /* libcrypto.0.9.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3B68D511802A8F00568ADB /* libcrypto.0.9.8.dylib */; };
 		4C3B68F311802D0A00568ADB /* ASIOauthRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3B68F211802D0900568ADB /* ASIOauthRequest.m */; };
 		4C7D0725117D85DC00F0C86B /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D071A117D85DC00F0C86B /* ASIFormDataRequest.m */; };
 		4C7D0726117D85DC00F0C86B /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D071C117D85DC00F0C86B /* ASIHTTPRequest.m */; };
@@ -18,6 +17,8 @@
 		4C7D072D117D85FD00F0C86B /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7D072C117D85FD00F0C86B /* libz.1.2.3.dylib */; };
 		4C7D0731117D861300F0C86B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7D0730117D861300F0C86B /* SystemConfiguration.framework */; };
 		4C7D0739117D86A800F0C86B /* ASIOauthTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D0738117D86A800F0C86B /* ASIOauthTestController.m */; };
+		4C9E716C11861EEE00DFFB08 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C9E716B11861EEE00DFFB08 /* AppKit.framework */; };
+		4C9E71921186222200DFFB08 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9E71911186222200DFFB08 /* NSData+Base64.m */; };
 		770B37ED0679A11B001EADE2 /* ASIOauthTest_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 770B37EC0679A11B001EADE2 /* ASIOauthTest_DataModel.xcdatamodel */; };
 		77C8280E06725ACE000B614F /* ASIOauthTest_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* ASIOauthTest_AppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -29,7 +30,6 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		2F7446980DB6B7EA00F9684A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* ASIOauthTest_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIOauthTest_Prefix.pch; sourceTree = "<group>"; };
@@ -52,6 +52,9 @@
 		4C7D0730117D861300F0C86B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4C7D0737117D86A800F0C86B /* ASIOauthTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIOauthTestController.h; sourceTree = "<group>"; };
 		4C7D0738117D86A800F0C86B /* ASIOauthTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIOauthTestController.m; sourceTree = "<group>"; };
+		4C9E716B11861EEE00DFFB08 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		4C9E71901186222200DFFB08 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		4C9E71911186222200DFFB08 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		770B37EC0679A11B001EADE2 /* ASIOauthTest_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = ASIOauthTest_DataModel.xcdatamodel; sourceTree = "<group>"; };
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		77C8280B06725ACE000B614F /* ASIOauthTest_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIOauthTest_AppDelegate.h; sourceTree = "<group>"; };
@@ -68,7 +71,7 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				4C7D072D117D85FD00F0C86B /* libz.1.2.3.dylib in Frameworks */,
 				4C7D0731117D861300F0C86B /* SystemConfiguration.framework in Frameworks */,
-				4C3B68D611802A8F00568ADB /* libcrypto.0.9.8.dylib in Frameworks */,
+				4C9E716C11861EEE00DFFB08 /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +81,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4C9E71901186222200DFFB08 /* NSData+Base64.h */,
+				4C9E71911186222200DFFB08 /* NSData+Base64.m */,
 				4C3B68F011802CE100568ADB /* ASI standard code */,
 				77C8280B06725ACE000B614F /* ASIOauthTest_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* ASIOauthTest_AppDelegate.m */,
@@ -100,7 +105,6 @@
 			children = (
 				77C82804067257F0000B614F /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
-				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -153,6 +157,7 @@
 				4C7D072C117D85FD00F0C86B /* libz.1.2.3.dylib */,
 				4C7D0730117D861300F0C86B /* SystemConfiguration.framework */,
 				4C3B68D511802A8F00568ADB /* libcrypto.0.9.8.dylib */,
+				4C9E716B11861EEE00DFFB08 /* AppKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 				4C7D0729117D85DC00F0C86B /* ASINSStringAdditions.m in Sources */,
 				4C7D0739117D86A800F0C86B /* ASIOauthTestController.m in Sources */,
 				4C3B68F311802D0A00568ADB /* ASIOauthRequest.m in Sources */,
+				4C9E71921186222200DFFB08 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
