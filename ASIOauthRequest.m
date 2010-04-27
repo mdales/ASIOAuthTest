@@ -129,8 +129,9 @@
 	
 	NSString *portString;
 	// we need to normalise the URL. We only include the port if it's non-standard.
-	if ((([[url scheme] compare: @"http"] == NSOrderedSame) && ([[url port] integerValue] == 80)) ||
-		(([[url scheme] compare: @"https"] == NSOrderedSame) && ([[url port] integerValue] == 443)))
+	if (([url port] == nil) ||
+	 ((([[url scheme] compare: @"http"] == NSOrderedSame) && ([[url port] integerValue] == 80)) ||
+		(([[url scheme] compare: @"https"] == NSOrderedSame) && ([[url port] integerValue] == 443))))
 	{
 		portString = @"";
 	}
