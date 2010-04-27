@@ -1,0 +1,5 @@
+This repo contains ASIOauthRequest, a first pass at adding OAuth support to the ASIHTTPRequest set of network classes.
+
+Currently ASIOauthRequest works with OAuth 1.0, and should support both Mac OS X and iPhone OS. The current implementation is restricted to POST rather than GET. 
+
+Currently work in progress.
