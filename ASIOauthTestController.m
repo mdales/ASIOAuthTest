@@ -9,8 +9,6 @@
 #import "ASIOauthTestController.h"
 #import "ASIOauthRequest.h"
 
-#import <openssl/hmac.h>
-
 #define SERVER @"http://172.16.235.128:1234"
 #define DEFAULT_CONSUMER_KEY @"kd94hf93k423kf45"
 #define DEFAULT_CONSUMER_SECRET @"dpf43f3p2l4k3l04"
