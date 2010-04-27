@@ -45,33 +45,14 @@
 //
 //
 - (void)fetchRequestTokenDidFinish: (ASIOauthRequest*)request
-{
-	NSLog(@"fetchRequestTokenDidFinish");
-	NSLog(@"body: %@", [request responseString]);
-	
-	// we now have a reply like: oauth_token_secret=CC2sL93UdYzwpQT9&oauth_token=Nw86rNQ653BnSGSw
-	NSString *response = [request responseString];
-	NSArray *pairs = [response componentsSeparatedByString: @"&"];
-	for (NSString* pair in pairs)
-	{
-		NSArray* key_value_parts = [pair componentsSeparatedByString: @"="];
-		if (key_value_parts.count != 2)
-			continue;
-		
-		NSString *key = [key_value_parts objectAtIndex: 0];
-		NSString *value = [key_value_parts objectAtIndex: 1];
-		
-		if ([key compare: @"oauth_token"] == NSOrderedSame)
-			[requestTokenField setStringValue: value];
-		else if ([key compare: @"oauth_token_secret"] == NSOrderedSame)
-			[requestSecretField setStringValue: value];
-	}
-	
+{	
+	[request parseReturnedToken];
+	[requestTokenField setStringValue: request.returnedTokenKey];
+	[requestSecretField setStringValue: request.returnedTokenSecret];
 	
 	[[NSWorkspace sharedWorkspace] openURL: 
 	 [NSURL URLWithString: [NSString stringWithFormat: @"%@/oauth/authorize/?oauth_token=%@", SERVER,
 							[requestTokenField stringValue]]]];
-
 }
 
 
@@ -119,28 +100,9 @@
 //
 - (void)fetchAccessTokenDidFinish: (ASIOauthRequest*)request
 {
-	NSLog(@"fetchAccessTokenDidFinish");
-	NSLog(@"body: %@", [request responseString]);
-	
-	// we now have a reply like: oauth_token_secret=CC2sL93UdYzwpQT9&oauth_token=Nw86rNQ653BnSGSw
-	NSString *response = [request responseString];
-	NSArray *pairs = [response componentsSeparatedByString: @"&"];
-	for (NSString* pair in pairs)
-	{
-		NSArray* key_value_parts = [pair componentsSeparatedByString: @"="];
-		if (key_value_parts.count != 2)
-			continue;
-		
-		NSString *key = [key_value_parts objectAtIndex: 0];
-		NSString *value = [key_value_parts objectAtIndex: 1];
-		
-		if ([key compare: @"oauth_token"] == NSOrderedSame)
-			[accessTokenField setStringValue: value];
-		else if ([key compare: @"oauth_token_secret"] == NSOrderedSame)
-			[accessSecretField setStringValue: value];
-	}
-	
-	
+	[request parseReturnedToken];
+	[accessTokenField setStringValue: request.returnedTokenKey];
+	[accessSecretField setStringValue: request.returnedTokenSecret];
 }
 
 
@@ -167,6 +129,10 @@
 														  andSecret: [consumerSecretField stringValue]];
 	[request setTokenWithKey: [requestTokenField stringValue]
 				   andSecret: [requestSecretField stringValue]];	
+		
+	// get the sig type to use - order matches the enumator we use to make things simple
+	ASIOauthSignatureMethod sigMethod = (ASIOauthSignatureMethod)[sigTypeButton indexOfSelectedItem];
+	request.signatureMethod = sigMethod;
 	
 	request.didFinishSelector = @selector(fetchAccessTokenDidFinish:);
 	request.didFailSelector = @selector(fetchAccessTokenDidFail:);
@@ -217,6 +183,12 @@
 														  andSecret: [consumerSecretField stringValue]];
 	[request setTokenWithKey: [accessTokenField stringValue]
 				   andSecret: [accessSecretField stringValue]];	
+	
+	
+	// get the sig type to use - order matches the enumator we use to make things simple
+	ASIOauthSignatureMethod sigMethod = (ASIOauthSignatureMethod)[sigTypeButton indexOfSelectedItem];
+	request.signatureMethod = sigMethod;
+	
 	
 	request.didFinishSelector = @selector(testCallDidFinish:);
 	request.didFailSelector = @selector(testCallDidFail:);

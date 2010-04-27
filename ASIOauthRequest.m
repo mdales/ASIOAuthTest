@@ -50,12 +50,45 @@
 	[consumerSecret release];
 	[tokenKey release];
 	[tokenSecret release];
+	[returnedTokenKey release];
+	[returnedTokenSecret release];
+	
 	[super dealloc];
 }
 
 
 #pragma mark -
-#pragma mark OAuth utility methods
+#pragma mark Token decoding untility methods
+
+- (void)parseReturnedToken
+{
+	// we should have a reply like: oauth_token_secret=CC2sL93UdYzwpQT9&oauth_token=Nw86rNQ653BnSGSw
+	NSString *response = [self responseString];
+	NSArray *pairs = [response componentsSeparatedByString: @"&"];
+	
+	// guard against people calling this code multiple times
+	[returnedTokenKey release]; returnedTokenKey = nil;
+	[returnedTokenSecret release]; returnedTokenSecret = nil;
+	
+	for (NSString* pair in pairs)
+	{
+		NSArray* key_value_parts = [pair componentsSeparatedByString: @"="];
+		if (key_value_parts.count != 2)
+			continue;
+		
+		NSString *key = [key_value_parts objectAtIndex: 0];
+		NSString *value = [key_value_parts objectAtIndex: 1];
+		
+		if ([key compare: @"oauth_token"] == NSOrderedSame)
+			returnedTokenKey = [value retain];
+		else if ([key compare: @"oauth_token_secret"] == NSOrderedSame)
+			returnedTokenSecret = [value retain];
+	}
+}
+
+
+#pragma mark -
+#pragma mark Internal OAuth utility methods
 
 - (NSString*)createNonce
 {
@@ -223,5 +256,7 @@
 @synthesize tokenKey;
 @synthesize tokenSecret;
 @synthesize signatureMethod;
+@synthesize returnedTokenKey;
+@synthesize returnedTokenSecret;
 
 @end
