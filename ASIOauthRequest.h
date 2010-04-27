@@ -6,7 +6,6 @@
 //  Copyright 2010 Michael Dales. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "ASIFormDataRequest.h"
 
 typedef enum _ASIOAuthSignatureMethod {
