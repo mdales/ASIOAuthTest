@@ -9,9 +9,9 @@
 #import "ASIOauthTestController.h"
 #import "ASIOauthRequest.h"
 
-#define SERVER @"http://172.16.235.128:1234"
-#define DEFAULT_CONSUMER_KEY @"kd94hf93k423kf45"
-#define DEFAULT_CONSUMER_SECRET @"dpf43f3p2l4k3l04"
+#define SERVER @"https://coda.camvine.com"
+#define DEFAULT_CONSUMER_KEY @"5cf7410e0aace626"
+#define DEFAULT_CONSUMER_SECRET @"53e7a189ab99905e"
 
 @implementation ASIOauthTestController
 

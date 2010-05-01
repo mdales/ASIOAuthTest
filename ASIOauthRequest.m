@@ -24,7 +24,7 @@
 	{
 		self.consumerKey = key;
 		self.consumerSecret = secret;
-		self.signatureMethod = ASIPlaintextOAuthSignatureMethod;
+		self.signatureMethod = ASIPlaintextOAuthSignatureMethod;		
 	}
 	
 	return self;
@@ -94,7 +94,9 @@
 {
 	NSString *res = @"";
 	
-	srandom(time(NULL));
+	// XXX: note we used to call srandom(time(NULL)) here, but we could generate requests too quickly,
+	// and the server would reject the same nonse being used too frequently.
+	
 	for (int i = 0; i < 10; i++)
 	{
 		res = [NSString stringWithFormat: @"%@%02x", res, random() % 16];
@@ -153,9 +155,7 @@
 	NSDictionary *params = postData;
 	NSMutableArray *keys = [NSMutableArray arrayWithArray: [params allKeys]];
 	
-	NSLog(@"keys before sorting: %@", keys);
 	[keys sortUsingSelector: @selector(compare:)];
-	NSLog(@"keys post sorting: %@", keys);
 	
 	// Build up the param string, before adding it, as it needs to be escaped
 	NSString *paramstr = @"";
@@ -174,10 +174,7 @@
 					 [self encodeURL: paramstr]];
 	
 	NSString *key = [NSString stringWithFormat: @"%@&%@", consumerSecret, tokenSecret != nil ? tokenSecret : @""];
-	
-	NSLog(@"raw: %@", raw);
-	NSLog(@"key: %@", key);
-	
+		
 	// we now have the raw text, and the key, so do the signing
 	return [self rawHMAC_SHA1EncodeString: raw
 								 usingKey: key];
@@ -233,7 +230,11 @@
 		[self setPostValue: tokenKey
 					forKey: @"oauth_token"];
 	
-	[self setPostValue: [NSString stringWithFormat: @"%lld", (int)[[NSDate date] timeIntervalSince1970]]
+	
+	NSDate *now = [NSDate date];
+	NSTimeInterval nowValue = [now timeIntervalSince1970];
+	NSString *timestamp = [NSString stringWithFormat: @"%d", (int)nowValue];
+	[self setPostValue: timestamp
 				forKey: @"oauth_timestamp"];
 	[self setPostValue: @"1.0"
 				forKey: @"oauth_version"];
