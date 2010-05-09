@@ -11,6 +11,7 @@
 #import "NSData+Base64.h"
 
 #import <CommonCrypto/CommonHMAC.h> 
+#import <sys/time.h>
 
 @implementation ASIOauthRequest
 
@@ -96,6 +97,9 @@
 	
 	// XXX: note we used to call srandom(time(NULL)) here, but we could generate requests too quickly,
 	// and the server would reject the same nonse being used too frequently.
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	srandom(tv.tv_usec + (1000000 * tv.tv_sec));
 	
 	for (int i = 0; i < 10; i++)
 	{		
