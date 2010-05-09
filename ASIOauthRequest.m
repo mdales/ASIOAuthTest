@@ -98,8 +98,8 @@
 	// and the server would reject the same nonse being used too frequently.
 	
 	for (int i = 0; i < 10; i++)
-	{
-		res = [NSString stringWithFormat: @"%@%02x", res, random() % 16];
+	{		
+		res = [NSString stringWithFormat: @"%@%02x", res, random() & 0XFF];
 	}
 	
 	return res;
